@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>For Kunjuuuu ❤️</title>
+<style>
+*{box-sizing:border-box}body{margin:0;min-height:100vh;font-family:Georgia,serif;color:#fff;background:radial-gradient(circle at top,#7a2348,#16070e 68%);overflow:hidden}
+#app{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:22px}.page{width:min(450px,100%);text-align:center;padding:30px 22px;border:1px solid #ffffff25;border-radius:30px;background:#ffffff10;backdrop-filter:blur(14px);box-shadow:0 25px 80px #0009;animation:in .65s ease}
+@keyframes in{from{opacity:0;transform:translateY(25px) scale(.97)}to{opacity:1;transform:none}}
+h1{font-size:38px;color:#ffd8e6;margin:10px 0}h2{color:#ffb9d1}.text{line-height:1.8;color:#f7dce6}.emoji{font-size:72px;animation:pulse 1.2s infinite}@keyframes pulse{50%{transform:scale(1.1)}}
+button{border:0;border-radius:30px;padding:14px 24px;margin:7px;background:linear-gradient(90deg,#ff4d8d,#ff164f);color:#fff;font-weight:bold;font-size:16px;cursor:pointer;box-shadow:0 8px 25px #ff174f45}
+input{width:100%;padding:15px;border:0;border-radius:15px;font-size:17px;text-align:center;margin:12px 0}.photo{height:210px;border-radius:22px;background:linear-gradient(135deg,#391225,#9b315c,#32101f);display:flex;align-items:center;justify-content:center;font-size:75px;margin:18px 0}.letter{background:#fff2f7;color:#48172a;text-align:left;border-radius:20px;padding:22px;line-height:1.8}.letter p{color:#48172a}
+#status{min-height:22px;color:#ffb0c7}.tiny{font-size:13px;color:#dcaabd}
+</style>
+</head>
+<body><div id="app"></div>
+<script>
+const app=document.getElementById("app");
+function page(content){app.innerHTML='<div class="page">'+content+'</div>'}
+async function verify(step,answer){
+ const r=await fetch("/api/verify",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({step,answer})});
+ return (await r.json()).ok;
+}
+function start(){page(`<div class="emoji">💌</div><h1>Hey Kunjuuuu...</h1><p class="text">I made a tiny surprise journey just for you.<br>But you have to unlock every little memory. ❤️</p><button onclick="q1()">Start the surprise ✨</button>`)}
+function q1(){page(`<div class="tiny">Question 1</div><h2>Do you remember our special date?</h2><input id="a" placeholder="DD / MM"><button onclick="go1()">Unlock ❤️</button><p id="status"></p>`)}
+async function go1(){let ok=await verify(1,document.getElementById("a").value); if(ok) q2(); else document.getElementById("status").textContent="Think about September... 👀❤️"}
+function q2(){page(`<div class="tiny">Question 2</div><h2>What was our first special memory?</h2><p class="text">Think of the first little adventure... 🥹</p><button onclick="go2('movie')">Movie 🎬</button><button onclick="go2('bike')">Bike ride 🏍️</button><button onclick="go2('food')">Food date 🍜</button><p id="status"></p>`)}
+async function go2(a){let ok=await verify(2,a);if(ok) q3();else document.getElementById("status").textContent="Nooo... remember our first ride 🏍️"}
+function q3(){page(`<div class="tiny">Question 3</div><h2>What is the name I call you? 🥹</h2><input id="a" placeholder="Your nickname"><button onclick="go3()">Reveal 💖</button><p id="status"></p>`)}
+async function go3(){let ok=await verify(3,document.getElementById("a").value);if(ok) memory();else document.getElementById("status").textContent="Starts with K... 👀"} 
+function memory(){page(`<div class="emoji">🏍️</div><h1>First Memory</h1><h2>Our Bike Ride ❤️</h2><div class="photo">🏍️</div><p class="text">A simple bike ride became one of those little memories that stays special. Sometimes the smallest moments become the biggest memories. 🥹</p><button onclick="q4()">Next memory →</button>`)}
+function q4(){page(`<div class="tiny">One more question...</div><h2>Ready to see what comes next?</h2><p class="text">No skipping this one. 😌<br>One answer and another surprise unlocks.</p><button onclick="photos()">I'm ready ❤️</button>`)}
+function photos(){page(`<h1>Our Little Memories</h1><div class="photo">📸</div><p class="text">Your real photo can be placed here later.</p><button onclick="nextPhoto()">Next photo →</button>`)}
+function nextPhoto(){page(`<h1>Another Memory</h1><div class="photo">🌅</div><p class="text">More moments, more laughs, more memories waiting to be added. 💕</p><button onclick="letter()">Open the letter 💌</button>`)}
+function letter(){page(`<div class="emoji">💌</div><h1>A Letter For You</h1><div class="letter"><p><b>My Kunjuuuu,</b></p><p>September 30 is more than just a date. It is a little reminder of a story filled with moments, smiles and memories.</p><p>From that first bike ride to all the moments still waiting for us, I hope we keep collecting little adventures together. ❤️</p><p><b>Happy Anniversary, Kunjuuuu. ♾️</b></p></div><button onclick="finale()">One final surprise ✨</button>`)}
+function finale(){page(`<div class="emoji">💖</div><h1>HAPPY ANNIVERSARY</h1><h2>Kunjuuuu ❤️</h2><p class="text">This little website is only a tiny reminder of something much bigger — the memories that make a story special.</p><p>🏍️ 💌 📸 ♾️</p><h2>Here's to many more memories. ❤️</h2><button onclick="start()">Replay our story 🔄</button>`)}
+start();
+</script></body></html>
